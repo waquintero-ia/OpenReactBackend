@@ -38,10 +38,12 @@ morgan.token('body', request => {
   return JSON.stringify(request.body)
 })
 
+app.use(express.static('dist'))
 app.use(express.json())
 app.use(requestLogger)
 app.use(morgan(':method :url :status :res[content-length] :response-time ms :body'))
 app.use(cors())
+
 
 
 const unknownEndpoint = (request, response) => {
@@ -113,6 +115,29 @@ app.post('/api/persons', (request, response) => {
   persons = persons.concat(person)
 
   response.json(person)
+})
+
+app.put('/api/persons/:id', (request,response) => {
+  const id = Number(request.params.id)
+  const body = request.body
+
+  const person = {
+    name: body.name,
+    number: body.number,
+    id: id
+  }
+
+  persons = persons.filter(person => person.id !== id)
+
+  console.log(persons)
+  console.log(id)
+
+  persons = persons.concat(person)
+
+  console.log(persons)
+
+  response.json(person)
+
 })
 
 
