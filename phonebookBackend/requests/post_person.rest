@@ -45,3 +45,48 @@ Content-Type: application/json
    "name": "Arto Hellas",
    "number":"999999"
 }
+
+####
+POST https://phonebook-open.fly.dev/api/persons
+Content-Type: application/json
+
+{
+   "name": "Arto Hellas",
+   "number":"999999"
+}
+
+###
+POST https://phonebook-open.fly.dev/api/persons
+Content-Type: application/json
+
+{
+   "name": "Arto World",
+   "number":"999999"
+}
+
+###
+POST https://phonebook-open.fly.dev/api/persons
+Content-Type: application/json
+
+{
+   "name": "",
+   "number":"999999"
+}
+
+###
+POST https://phonebook-open.fly.dev/api/persons
+Content-Type: application/json
+
+{
+   "name": "Arto Work",
+   "number":""
+}
+
+###
+POST https://phonebook-open.fly.dev/api/perso
+Content-Type: application/json
+
+{
+   "name": "Arto Work",
+   "number":""
+}

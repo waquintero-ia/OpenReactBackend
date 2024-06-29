@@ -2,3 +2,10 @@ GET http://localhost:3001/api/notes
 
 ###
 GET http://localhost:3001/api/persons
+
+###
+
+GET https://phonebook-open.fly.dev/api/persons
+
+###
+GET https://phonebook-open.fly.dev/
