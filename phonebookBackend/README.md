@@ -1,0 +1,1 @@
+application deployed in https://phonebook-open.fly.dev
