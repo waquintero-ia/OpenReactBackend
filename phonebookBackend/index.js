@@ -1,7 +1,9 @@
+require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
 const cors = require('cors')
+const Person = require('./models/people')
 
 let persons = [
     { 
@@ -44,14 +46,14 @@ app.use(requestLogger)
 app.use(morgan(':method :url :status :res[content-length] :response-time ms :body'))
 app.use(cors())
 
-
-
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
 }
 
 app.get('/api/persons', (request, response) => {
-    response.json(persons)
+    Person.find ({}).then(people => {
+      response.json(people)
+    })
 })
 
 app.get('/info', (request, response) => {
@@ -64,15 +66,13 @@ app.get('/info', (request, response) => {
 })
 
 app.get('/api/persons/:id', (request, response) => {
-    const id = Number(request.params.id)
-    const person = persons.find(person => person.id === id)
-    
-    if(person){
-        response.json(person)
-    }else{
-        response.status(404).end()
-    }
+    const person = Person.findById (request.params.id).then(people => {
+      response.json(people)
+    })
+
+    console.log(Person.findById (request.params.id))
 })
+
 
 app.delete('/api/persons/:id', (request, response) =>{
     const id = Number(request.params.id)
@@ -139,8 +139,6 @@ app.put('/api/persons/:id', (request,response) => {
   response.json(person)
 
 })
-
-
 
 app.use(unknownEndpoint)
 
