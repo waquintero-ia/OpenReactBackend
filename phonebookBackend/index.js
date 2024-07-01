@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const app = express()
 const cors = require('cors')
 const Person = require('./models/people')
+const people = require('./models/people')
 
 let persons = [
     { 
@@ -66,78 +67,63 @@ app.get('/info', (request, response) => {
 })
 
 app.get('/api/persons/:id', (request, response) => {
-    const person = Person.findById (request.params.id).then(people => {
-      response.json(people)
+      Person.findById (request.params.id).then(people => {
+
+        if(people === null){
+          response.status(404).end()
+        }else{
+          response.json(people)
+        }
     })
-
-    console.log(Person.findById (request.params.id))
 })
-
 
 app.delete('/api/persons/:id', (request, response) =>{
-    const id = Number(request.params.id)
-    persons = persons.filter(person => person.id !== id)
-
+  Person.findByIdAndDelete(request.params.id).then(people =>{
     response.status(204).end()
+  })
 })
-
-const generateId = () => {
-
-  let min = 20
-  let max = 5000
-
-  let maxId = Math.floor(Math.random()*(max-min+1)+min)
-
-  return maxId
-}
 
 app.post('/api/persons', (request, response) => {
   const body = request.body
 
-  if (!body.name || !body.number) {
+  if (body.name === "" || body.number === "") {
     return response.status(400).json({ 
       error: 'name or number missing' 
     })
   }
 
-  if(persons.find(person => person.name === body.name)){
-    return response.status(400).json({
-      error: 'name must be unique'
-    })
-  }
+  console.log('el nombre es...', body.name)
 
-  const person = {
-    name: body.name,
-    number: body.number,
-    id: generateId(),
-  }
+  Person.findOne({'name': body.name}).then(people =>{
+    if(people === null){
 
-  persons = persons.concat(person)
-
-  response.json(person)
+        const people = new Person({
+        name: body.name,
+        number: body.number,
+      })
+    
+        people.save().then(savedPeople => {
+        response.json(savedPeople)
+      })
+    }else if(people.name === body.name){
+            console.log(people.name)
+            
+            return response.status(400).json({
+            error: 'name must be unique'
+          })
+    }
+  })
 })
 
 app.put('/api/persons/:id', (request,response) => {
-  const id = Number(request.params.id)
   const body = request.body
+  const id = request.params.id
 
-  const person = {
-    name: body.name,
-    number: body.number,
-    id: id
-  }
-
-  persons = persons.filter(person => person.id !== id)
-
-  console.log(persons)
-  console.log(id)
-
-  persons = persons.concat(person)
-
-  console.log(persons)
-
-  response.json(person)
-
+  Person.findByIdAndUpdate(request.params.id, request.body).then(people =>{
+    people.save().then(updatePeople => {
+      response.json(updatePeople)
+    })
+  })
 })
 
 app.use(unknownEndpoint)

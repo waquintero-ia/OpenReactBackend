@@ -2,7 +2,7 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-   "name": "Liisa Marttinen",
+   "name": "Arto",
    "number":"040-243653"
 }
 
@@ -38,6 +38,25 @@ Content-Type: application/json
 
 ########
 
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+   "name": "Liisa Marttinen",
+   "number":"999999"
+}
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+   "name": "Arto World",
+   "number":"999999"
+}
+
+########
+
 POST http://localhost:3001/personas
 Content-Type: application/json
 
@@ -45,6 +64,7 @@ Content-Type: application/json
    "name": "Arto Hellas",
    "number":"999999"
 }
+
 
 ####
 POST https://phonebook-open.fly.dev/api/persons
