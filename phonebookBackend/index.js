@@ -63,25 +63,21 @@ app.get('/info', (request, response) => {
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
-      Person.findById (request.params.id).then(people => {
-
-        if(people === null){
-          response.status(404).end()
-        }else{
-          response.json(people)
-        }
+      Person.findById (request.params.id).then(people => {      
+        response.json(people)
     })
     .catch(error => next(error))
+      
 })
 
 app.delete('/api/persons/:id', (request, response, next) =>{
-  Person.findByIdAndDelete(request.params.id).then(people =>{
+  Person.findByIdAndDelete(request.params.id).then(people =>{ 
+    
     if(people){
       response.status(204).end()
     }else{
       response.status(404).end()
     }
-    
   })
   .catch(error => next(error))
 })
@@ -118,15 +114,19 @@ app.post('/api/persons', (request, response) => {
   })
 })
 
-app.put('/api/persons/:id', (request,response) => {
+app.put('/api/persons/:id', (request,response,next) => {
   const body = request.body
   const id = request.params.id
 
-  Person.findByIdAndUpdate(request.params.id, request.body).then(people =>{
-    people.save().then(updatePeople => {
+  Person.findByIdAndUpdate(request.params.id, request.body).then(updatePeople =>{
+    if(updatePeople === null){
+      response.status(404).end()
+    }else{
       response.json(updatePeople)
-    })
+    }  
+    
   })
+  .catch(error => next(error))
 })
 
 const unknownEndpoint = (request, response) => {
