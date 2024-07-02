@@ -123,12 +123,18 @@ app.put('/api/persons/:id', (request,response,next) => {
   const body = request.body
   const id = request.params.id
 
-  Person.findByIdAndUpdate(request.params.id, request.body).then(updatePeople =>{
-    if(updatePeople === null){
-      response.status(404).end()
-    }else{
-      response.json(updatePeople)
-    }  
+  const { name, number } = request.body
+
+  Person.findByIdAndUpdate(request.params.id, 
+    { name, number },
+    { new: true, runValidators: true, context:'query'}
+  )
+    .then(updatePeople =>{
+      if(updatePeople === null){
+        response.status(404).end()
+      }else{
+        response.json(updatePeople)
+      }  
   })
   .catch(error => next(error))
 })
