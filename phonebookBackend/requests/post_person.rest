@@ -52,7 +52,26 @@ Content-Type: application/json
 
 {
    "name": "Arto World",
-   "number":"999999"
+   "number":"999-999-999"
+}
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+   "name": "Arto Work",
+   "number":"99-999-999"
+}
+
+###
+
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+   "name": "Arto Sleep",
+   "number":"99999999"
 }
 
 ###
