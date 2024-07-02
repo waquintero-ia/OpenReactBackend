@@ -7,12 +7,12 @@ const Person = require('./models/people')
 const people = require('./models/people')
 
 let persons = [
-    { 
-      "id": 1,
-      "name": "Arto Hellas", 
-      "number": "040-123456"
-    },
-    { 
+  { 
+    'id': 1,
+    "name": "Arto Hellas", 
+    "number": "040-123456"
+  },
+  { 
       "id": 2,
       "name": "Ada Lovelace", 
       "number": "39-44-5323523"
@@ -20,7 +20,7 @@ let persons = [
     { 
       "id": 3,
       "name": "Dan Abramov", 
-      "number": "12-43-234345"
+    "number": "12-43-234345"
     },
     { 
       "id": 4,
@@ -34,7 +34,7 @@ const requestLogger = (request, response, next) => {
   console.log('Path: ', request.path)
   console.log('Body: ', request.body)
   console.log('---')
-  next()  
+  next()
 }
 
 morgan.token('body', request => {
