@@ -5,3 +5,12 @@ Content-Type: application/json
    "name": "Liisa Marttinen",
    "number":"4444"
 }
+
+####
+PUT http://localhost:3001/api/persons/66822f652632814892c59a5d
+Content-Type: application/json
+
+{
+   "name": "la",
+   "number":"4444"
+}

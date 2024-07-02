@@ -82,7 +82,7 @@ app.delete('/api/persons/:id', (request, response, next) =>{
   .catch(error => next(error))
 })
 
-app.post('/api/persons', (request, response) => {
+app.post('/api/persons', (request, response, next) => {
   const body = request.body
 
   if (body.name === "" || body.number === "") {
@@ -104,6 +104,10 @@ app.post('/api/persons', (request, response) => {
         people.save().then(savedPeople => {
         response.json(savedPeople)
       })
+      .catch(error => {
+        console.log('entra en el catch?')
+        next(error)
+      })
     }else if(people.name === body.name){
             console.log(people.name)
             
@@ -112,6 +116,7 @@ app.post('/api/persons', (request, response) => {
           })
     }
   })
+  
 })
 
 app.put('/api/persons/:id', (request,response,next) => {
@@ -124,7 +129,6 @@ app.put('/api/persons/:id', (request,response,next) => {
     }else{
       response.json(updatePeople)
     }  
-    
   })
   .catch(error => next(error))
 })
@@ -140,6 +144,10 @@ const errorHandler = (error, request, response, next) => {
 
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
+  }else if(error.name === 'ValidationError'){
+    return response.status(400).json({ error: error.message })
+  }else if(error.name === 'MongooseError'){
+    return response.status(404).send({ error: error.message})
   } 
 
   next(error)
