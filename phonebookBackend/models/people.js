@@ -23,13 +23,13 @@ mongoose.connect(url)
     number: {
       type: String,
       minLength: 8,
+      required: true,
       validate:{
         validator: function(v){
-          return  /\d{3}-\d{3}-/.test(v) || /\d{2}-\d{3}-/.test(v)
+          return  /^\d{2,3}-\d{3}-\d{5}$/.test(v)
         },
-        message: 'The correct format for the phone number is 00-000-000.. or 000-000-00..'
+        message: 'The correct format for the phone number is 00-000-00000 or 000-000-00000.'
       },
-      required: true
     }
   })
 
