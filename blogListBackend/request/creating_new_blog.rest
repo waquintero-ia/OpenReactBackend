@@ -1,0 +1,76 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "And Then There Were None",
+    "author": "Agatha Christie",
+    "url": "https://www.amazon.es/Then-There-Were-None/dp/0008328927",
+    "likes": 1
+}
+
+##### good request another book
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "Murder on the Orient Express: The Graphic Novel (Poirot) (English Edition)",
+    "author": "Agatha Christie",
+    "url": "https://www.amazon.es/Murder-Orient-Express-Graphic-English-ebook/dp/B0BX515LWH/?_encoding=UTF8&pd_rd_w=gkAWL&content-id=amzn1.sym.d3cdd5ae-f833-4214-ac7b-8149d552b3b3&pf_rd_p=d3cdd5ae-f833-4214-ac7b-8149d552b3b3&pf_rd_r=262-7744814-4781507&pd_rd_wg=ZSazp&pd_rd_r=734b32ac-ba41-4a26-82fa-43d2cfa8e0c5&ref_=aufs_ap_sc_dsk",
+    "likes": 2
+}
+
+##### good request another book
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "The Secret of Chimneys (Classic bestseller) (English Edition)",
+    "author": "Agatha Christie",
+    "url": "https://www.amazon.es/Secret-Chimneys-Classic-bestseller-English-ebook/dp/B09MFMF9YZ?ref_=ast_author_dp&dib=eyJ2IjoiMSJ9.vsuVgmbw58casL79NX90Yup8uguaJ7vv-ZFYBAYij96GbQ_ZIuEnEiZEt-Tdo3loTMd-Bd8ZQJlqnVLbYPx7iohc5MXlKJa0YJL-TdNaIC8vY-g0NJ4wqiWBF0_BsSXwFjyw892rQVfZ_nBqLyahVK4g9bdBp_7idHFCalCGsZuFVxqcRGFT4F9koZXDB3hGwSJDvUj0RCsrLt3t1pkBQc3Lx4nfjARmzTDjw7_Kq_E.d8RNyacPP-jJ_y25y8j8wsSNBsSTYkvkJxzKXi_XejI&dib_tag=AUTHOR",
+    "likes": 2
+}
+
+##### good request another book
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "And Then There Were None",
+    "author": "Agatha Christie",
+    "url": "https://www.amazon.es/Then-There-Were-None/dp/0008328927",
+    "likes": 1
+}
+
+
+##### bad url
+POST http://localhost:3003/api/blog
+Content-Type: application/json
+
+{
+    "title": "And Then There Were None",
+    "author": "Agatha Christie",
+    "url": "https://www.amazon.es/Then-There-Were-None/dp/0008328927",
+    "likes": 1
+}
+
+##### bad likes
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "And Then There Were None",
+    "author": "Agatha Christie",
+    "url": "https://www.amazon.es/Then-There-Were-None/dp/0008328927",
+    "likes": "one"
+}
+
+##### bad url
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "And Then There Were None",
+    "author": "Agatha Christie",
+    "url": 78,
+    "likes": 1
+}
