@@ -30,12 +30,14 @@ const favoriteBlog = (blogs) => {
 }
 
 const mostBlogs = (blogs) => {
-    
-    const maxLikesBlog = _.maxBy(blogs, 'likes')
+  
+  const blogsPorAutor = _.groupBy(blogs, 'author')
 
-    const { author, likes } = maxLikesBlog
+  const autorConMasBlogs = _.maxBy(_.keys(blogsPorAutor), autor => _.size(blogsPorAutor[autor]))
 
-    return { author, likes }
+  const resultado = { author: autorConMasBlogs, blogs: _.size(blogsPorAutor[autorConMasBlogs]) }
+
+  return resultado
 }
 
 module.exports = {

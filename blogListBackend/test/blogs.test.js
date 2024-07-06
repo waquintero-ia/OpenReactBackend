@@ -218,10 +218,10 @@ describe('the most liked author',() => {
   ]
 
   const theMostAuthor = 
-    {
-      author: "Edsger W. Dijkstra",
-      likes: 12
-    }
+  {
+    author: "Robert C. Martin",
+    blogs: 3
+  }
   
   
   test('the author with most likes is...',() => {
