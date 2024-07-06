@@ -93,7 +93,7 @@ describe('total likes', () => {
 
 })
 
-describe('favorites blogs',() =>{
+describe('blog more liked',() =>{
 
   const listWithManyBlogs = [
     {
