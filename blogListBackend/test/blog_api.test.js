@@ -6,7 +6,6 @@ const app = require('../app')
 const api = supertest(app)
 const Blog = require('../models/blog')
 const helper = require('./test_helper')
-const { request } = require('node:http')
 
 beforeEach(async () => {
 
@@ -25,6 +24,14 @@ test('all notes are returned', async () => {
   const response = await api.get('/api/blogs')
 
    assert.strictEqual(response.body.length, helper.initialBlogs.length)
+})
+
+test('unique identifier of blog posts is called id', async () => {
+  console.log('entra a la prueba')
+  const response = await api.get('/api/blogs')
+
+  result = helper.verifyIDs(response.body)
+  assert.strictEqual(result, helper.initialBlogs.length)
 })
 
 after(async () => {

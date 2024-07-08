@@ -1,4 +1,5 @@
 const Blog = require('../models/blog')
+const _ = require('lodash')
 
 const initialBlogs = [
   {
@@ -39,6 +40,12 @@ const initialBlogs = [
   }     
 ]
 
+const verifyIDs = (blogs) => {
+  const IdBlogs = _.map(blogs, 'id')
+  return IdBlogs.length
+}
+
 module.exports = {
-  initialBlogs
+  initialBlogs,
+  verifyIDs
 }
