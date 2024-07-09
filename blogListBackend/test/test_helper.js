@@ -45,7 +45,13 @@ const verifyIDs = (blogs) => {
   return IdBlogs.length
 }
 
+const blogsInDb = async () => {
+  const blogs = await Blog.find({})
+  return blogs.map(blog => blog.toJSON())
+}
+
 module.exports = {
   initialBlogs,
-  verifyIDs
+  verifyIDs,
+  blogsInDb
 }
