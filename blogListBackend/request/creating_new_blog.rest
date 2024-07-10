@@ -41,6 +41,17 @@ Content-Type: application/json
     "likes": 1
 }
 
+#### create blog without likes
+
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "And Then There Were None",
+    "author": "Agatha Christie",
+    "url": "https://www.amazon.es/Then-There-Were-None/dp/0008328927"
+}
+
 
 ##### bad url
 POST http://localhost:3003/api/blog

@@ -7,6 +7,8 @@ const api = supertest(app)
 const Blog = require('../models/blog')
 const helper = require('./test_helper')
 const { request } = require('node:http')
+const { title } = require('node:process')
+const { url } = require('node:inspector')
 
 beforeEach(async () => {
 
@@ -62,4 +64,23 @@ test('a valid blog can be added', async () => {
 
     const contents = blogsAtEnd.map(n => n.title)
     assert(contents.includes('Bussiness catalyst & life alchemist'))
+})
+
+test('creating blogs without likes', async () => {
+  const newBlog = {
+    title: "Bussiness catalyst & life alchemist",
+    author: "Laura Ribas",
+    url: "https://lauraribas.com"
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+    const blogsAtEnd = await helper.blogsInDb()
+    assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length + 1)
+
+    assert.strictEqual(helper.likesInDb(blogsAtEnd, 'Bussiness catalyst & life alchemist' ), 0)
 })

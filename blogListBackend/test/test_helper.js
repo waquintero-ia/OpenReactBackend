@@ -50,8 +50,14 @@ const blogsInDb = async () => {
   return blogs.map(blog => blog.toJSON())
 }
 
+const likesInDb = (blogs, name) => {
+  const blogLike = _.find(blogs, { 'title': name })
+  return blogLike.likes
+}
+
 module.exports = {
   initialBlogs,
   verifyIDs,
-  blogsInDb
+  blogsInDb,
+  likesInDb
 }
