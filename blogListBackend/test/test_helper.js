@@ -55,9 +55,14 @@ const likesInDb = (blogs, name) => {
   return blogLike.likes
 }
 
+const idToDelete = (blogs) => {
+  return blogs[0].id
+}
+
 module.exports = {
   initialBlogs,
   verifyIDs,
   blogsInDb,
-  likesInDb
+  likesInDb,
+  idToDelete
 }

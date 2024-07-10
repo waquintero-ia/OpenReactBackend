@@ -1,0 +1,5 @@
+DELETE  http://localhost:3003/api/blogs/668dcb86bf2af20c243977bf
+
+
+#### delete bad id
+DELETE  http://localhost:3003/api/blogs/668dcb86bf2af20c2
