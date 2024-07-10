@@ -52,6 +52,27 @@ Content-Type: application/json
     "url": "https://www.amazon.es/Then-There-Were-None/dp/0008328927"
 }
 
+### creating blog without title
+
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "",
+    "author": "Agatha Christie",
+    "url": "https://www.amazon.es/Then-There-Were-None/dp/0008328927"
+}
+
+### creating blog without url
+
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "And Then There Were None",
+    "author": "Agatha Christie",
+    "url": ""
+}
 
 ##### bad url
 POST http://localhost:3003/api/blog

@@ -84,3 +84,17 @@ test('creating blogs without likes', async () => {
 
     assert.strictEqual(helper.likesInDb(blogsAtEnd, 'Bussiness catalyst & life alchemist' ), 0)
 })
+
+test('creating blogs without title or url', async () =>{
+  const newBlog = {
+    title: "",
+    author: "Laura Ribas",
+    url: ""
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+    .expect('Content-Type', /application\/json/)
+})

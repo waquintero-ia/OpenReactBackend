@@ -1,10 +1,14 @@
 const mongoose = require('mongoose')
 
 const blogSchema = new mongoose.Schema({
-    title: String,
+    title: {
+      type: String,
+      required: true
+    },
     author: String,
     url: {
       type: String,
+      required: true,
       validate:{
         validator: function(v){
           return /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/.test(v)
