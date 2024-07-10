@@ -9,19 +9,9 @@ const helper = require('./test_helper')
 
 describe ('when there is initially some notes saved', () =>{
   beforeEach(async () => {
-
-    const statusApp = (await api.get('/api/blogs')).status
-    
-    console.log(statusApp) 
   
     await Blog.deleteMany({})
-    console.log('delete blogs')  
-  
-    const noteObjects = helper.initialBlogs
-      .map(blog => new Blog(blog))
-    const promiseArray = noteObjects.map(blog => blog.save())
-    await Promise.all(promiseArray)
-    console.log('created blogs')
+    await Blog.insertMany(helper.initialBlogs)
   })
   
   test('all notes are returned', async () => {

@@ -27,7 +27,10 @@ connectDB()
 app.use(cors())
 app.use(express.json())
 app.use(middleware.requestLogger)
-app.use(middleware.morgan(':method :url :status :res[content-length] :response-time ms :body'))
+
+if(process.env.NODE_ENV !== 'test' ){
+  app.use(middleware.morgan(':method :url :status :res[content-length] :response-time ms :body'))
+}
 
 app.use('/api/blogs', blogsRouter)
 
