@@ -111,6 +111,28 @@ describe ('when there is initially some notes saved', () =>{
         .expect(400)
     })
   })
+
+  describe('testin put', () => {
+    test('updating likes', async () =>{
+      const blogToId = await helper.blogsInDb()
+      const id = helper.idToDelete(blogToId)
+
+      const newLike = {
+        likes: 999
+      }
+
+      await api
+        .put(`/api/blogs/${id}`)
+        .send(newLike)
+        .expect(200)
+      
+
+      const blogsAtEnd = await helper.blogsInDb()
+      assert.strictEqual(helper.likesInDb(blogsAtEnd, 'React patterns' ), 999)
+      
+    })
+  })
+
 })
 
 after(async () => {
