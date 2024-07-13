@@ -106,3 +106,16 @@ Content-Type: application/json
     "url": 78,
     "likes": 1
 }
+
+###
+
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "And Then There Were None",
+    "author": "Agatha Christie",
+    "url": "https://www.amazon.es/Then-There-Were-None/dp/0008328927",
+    "likes": 1,
+    "userId": "6692d8de7b6662edb2c32828"
+}
