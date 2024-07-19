@@ -2,14 +2,25 @@ const logger = require('./logger')
 const morgan = require('morgan')
 
 morgan.token('body', request => {
-  return JSON.stringify(request.body)
+  const { password, ...bodyWithoutPassword } = request.body
+  return JSON.stringify(bodyWithoutPassword)
 })
 
 const requestLogger = (request, response, next) => {
+  const { password, ...bodyWithoutPassword } = request.body
   logger.info('Method:', request.method)
   logger.info('Path:  ', request.path)
-  logger.info('Body:  ', request.body)
+  logger.info('Body:  ', bodyWithoutPassword)
   logger.info('---')
+  next()
+}
+
+const tokenExtractor = (request, response, next) => {
+  const authorization = request.get('authorization')
+  if (authorization && authorization.startsWith('Bearer ')){
+    request.token = authorization.replace('Bearer ', '')
+  }
+
   next()
 }
 
@@ -39,5 +50,6 @@ module.exports = {
     requestLogger,
     unknownEndpoint,
     errorHandler,
-    morgan
+    morgan,
+    tokenExtractor
   }
