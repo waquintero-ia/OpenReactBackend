@@ -28,7 +28,7 @@ const errorHandler = (error, request, response, next) => {
     return response.status(404).json({ error: error.message })
   } else if (error.name === 'MongoServerError' && 'E11000 duplicate key error collection'){
     return response.status(400).json({ error: 'expected `username` to be unique' })
-  }
+  } 
 
   next(error)
 }

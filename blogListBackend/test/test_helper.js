@@ -1,6 +1,6 @@
-const blog = require('../models/blog')
 const Blog = require('../models/blog')
 const _ = require('lodash')
+const User = require('../models/user')
 
 const initialBlogs = [
   {
@@ -41,6 +41,19 @@ const initialBlogs = [
   }     
 ]
 
+const initialUsers = [
+  {
+    username: 'root',
+    name: 'root',
+    password: '12345'
+  },
+  {
+    username: 'mike',
+    name: 'mike',
+    password: '12345777'
+  }
+]
+
 const verifyIDs = (blogs) => {
   const IdBlogs = _.map(blogs, 'id')
   return IdBlogs.length
@@ -60,10 +73,17 @@ const idToDelete = (blogs) => {
   return blogs[0].id
 }
 
+const usersInDb = async () => {
+  const users = await User.find({})
+  return users.map(u => u.toJSON())
+}
+
 module.exports = {
   initialBlogs,
   verifyIDs,
   blogsInDb,
   likesInDb,
-  idToDelete
+  idToDelete,
+  initialUsers,
+  usersInDb
 }
